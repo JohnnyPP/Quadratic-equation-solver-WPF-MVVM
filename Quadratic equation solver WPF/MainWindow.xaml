@@ -1,0 +1,36 @@
+﻿<Window x:Class="Quadratic_equation_solver_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Quadratic_equation_solver_WPF" 
+        Title="Quadratic equation solver" Height="350" Width="403" SizeToContent="WidthAndHeight">
+    <Window.DataContext>
+        <!-- Declaratively create an instance of our ViewModel -->
+        <local:ViewModel />
+    </Window.DataContext>
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="383">
+            <TextBlock TextWrapping="Wrap" Text="The program solves the quadratic equation of the form ax²+bx+c=0" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="175" Margin="10,45,0,0" VerticalAlignment="Top" Width="383" >
+            <TextBox 
+                Height="24" 
+                Name="TextBox_input" 
+                Text="{Binding Path=UpdateTextBox, Mode=TwoWay}"  
+                Margin="0,0,10,0"  
+                ToolTipService.ShowDuration="10000">
+                <TextBox.ToolTip>
+                    <ToolTip 
+                        Placement="Bottom"
+                        StaysOpen="True" 
+                        Content="Example: To solve the equation of the form 2x²+2x-1=0 &#x0a;enter 2,2,-1 in the text box">
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Button Command="{Binding UpdateLabelButtonClick}" Content="Calculate" Name="Button_calculate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="373"/>
+            <Label Content="{Binding UpdateLabel}" x:Name="Label_results" Height="129"/>
+            <TextBlock><Span><Run Text="Code"/><Run Typography.Variants="Ordinal" Text="Guru"/></Span></TextBlock>
+        </StackPanel>
+
+
+    </Grid>
+</Window>
