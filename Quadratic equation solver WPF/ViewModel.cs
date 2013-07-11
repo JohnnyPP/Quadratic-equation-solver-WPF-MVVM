@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace Quadratic_equation_solver_WPF
 {
@@ -13,7 +14,22 @@ namespace Quadratic_equation_solver_WPF
     {
         
         Solver solve = new Solver();
+        private DateTime _now;
 
+        public ViewModel()
+	    {
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+	    }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            
+                TimeCommand = DateTime.Now;
+              
+        }
 
         private string updateTextBox;
 
@@ -77,6 +93,28 @@ namespace Quadratic_equation_solver_WPF
         }
         #endregion
 
+
+        ///////////////////////////////////////DateTime
+        #region DateTime
+
+
+
+        private DateTime timeCommand;
+
+        public DateTime TimeCommand
+        {
+            get { return timeCommand; }
+            set
+            {
+                if (timeCommand != value)
+                {
+                    timeCommand = value;
+                    RaisePropertyChanged("TimeCommand");
+                }
+                timeCommand = value;
+            }
+        }
+        #endregion
 
     }
 }
