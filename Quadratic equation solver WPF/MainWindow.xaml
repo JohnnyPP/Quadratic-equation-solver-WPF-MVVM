@@ -15,7 +15,7 @@
             <TextBox 
                 Height="24" 
                 Name="TextBox_input" 
-                Text="{Binding Path=UpdateTextBox, Mode=TwoWay}"  
+                Text="{Binding Path=UpdateTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                 Margin="0,0,10,0"  
                 ToolTipService.ShowDuration="10000">
                 <TextBox.ToolTip>
@@ -25,6 +25,9 @@
                         Content="Example: To solve the equation of the form 2x²+2x-1=0 &#x0a;enter 2,2,-1 in the text box">
                     </ToolTip>
                 </TextBox.ToolTip>
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding Path=UpdateLabelButtonClick}" Key="Enter" />
+                </TextBox.InputBindings>
             </TextBox>
             <Button Command="{Binding UpdateLabelButtonClick}" Content="Calculate" Name="Button_calculate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="373"/>
             <Label Content="{Binding UpdateLabel}" x:Name="Label_results" Height="129"/>
