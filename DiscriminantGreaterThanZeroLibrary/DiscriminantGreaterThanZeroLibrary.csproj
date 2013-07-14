@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DiscriminantGreaterThanZero.cs" />
     <Compile Include="DiscriminantGreaterThanZeroCapitalLetters.cs" />
+    <Compile Include="DiscriminantGreaterThanZeroTuple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

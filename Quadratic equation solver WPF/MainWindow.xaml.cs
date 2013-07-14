@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EquationSolver;
 
 namespace Quadratic_equation_solver_WPF
 {
@@ -21,9 +20,6 @@ namespace Quadratic_equation_solver_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        Solver solve = new Solver();
-        
         public MainWindow()
         {
             InitializeComponent();

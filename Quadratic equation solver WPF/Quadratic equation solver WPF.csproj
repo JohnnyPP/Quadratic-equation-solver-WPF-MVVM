@@ -100,6 +100,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EquationSolverTuple\EquationSolverTuple.csproj">
+      <Project>{d506cfc4-c3fc-49dc-9aeb-357e847b6854}</Project>
+      <Name>EquationSolverTuple</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EquationSolver\EquationSolver.csproj">
       <Project>{30f64796-45b0-4986-a62a-c5d2a6f6fd3f}</Project>
       <Name>EquationSolver</Name>

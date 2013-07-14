@@ -1,4 +1,5 @@
 ﻿using EquationSolver;
+using EquationSolverTuple;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,7 @@ namespace Quadratic_equation_solver_WPF
         /// Creates instance of the EquationSolver
         /// </summary>
         Solver solve = new Solver();
+        SolverTuple solveTuple = new SolverTuple();
 
         /// <summary>
 		/// The time command
@@ -37,9 +39,9 @@ namespace Quadratic_equation_solver_WPF
 		private string updateLabel;
 
         /// <summary>
-        /// The index
+        /// The index History
         /// </summary>
-        int index = 1;
+        int indexHistory = 1;
 
         #endregion
 
@@ -117,16 +119,6 @@ namespace Quadratic_equation_solver_WPF
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
-
-            //listViewCollection.Add(new ListViewData { ListView_No = "World Of Warcraft", 
-            //    ListView_a = "Blizzarda", 
-            //    ListView_b = "Blizzardb" , 
-            //    ListView_c = "Blizzard2c" , 
-            //    ListView_x1 = "Blizzardx1" , 
-            //    ListView_x2 = "Blizzardx2"});
-          //listViewCollection.Add(new ListViewData { ListView_No = "Halo", ListView_a = "Bungie", ListView_b = "Microsoft" });
-          //listViewCollection.Add(new ListViewData { ListView_No = "Gears Of War", ListView_a = "Epic", ListView_b = "Microsoft" });
-
         }
 
         /// <summary>
@@ -171,17 +163,23 @@ namespace Quadratic_equation_solver_WPF
 		void UpdateLabelExecute()
 		{
 
-			UpdateLabel = solve.Results(UpdateTextBox);
+			//UpdateLabel = solve.Results(UpdateTextBox);
 
-            listViewCollection.Add(new ListViewData { ListView_No = index.ToString(),
-                                                      ListView_a = "a",
-                                                      ListView_b = "b",
-                                                      ListView_c = "c",
-                                                      ListView_x1 = "x1",
-                                                      ListView_x2 = "x2"
-            });
+            var tupleResults = solveTuple.ResultsTuple(UpdateTextBox);
+            UpdateLabel = tupleResults.Item1;
+            
+            listViewCollection.Add(new ListViewData { ListView_No = indexHistory.ToString(),
+                                                      ListView_a = solveTuple.a.ToString(),
+                                                      ListView_b = solveTuple.b.ToString(),
+                                                      ListView_c = solveTuple.c.ToString(),
+                                                      ListView_Discriminant = solveTuple.Discriminant.ToString(),
+                                                      ListView_x1 = tupleResults.Item2,
+                                                      ListView_x2 = tupleResults.Item3
+                                                    });
 
-            index++;
+            indexHistory++;
+
+
 		}
 
         /// <summary>
@@ -262,6 +260,7 @@ namespace Quadratic_equation_solver_WPF
         public string ListView_a { get; set; }
         public string ListView_b { get; set; }
         public string ListView_c { get; set; }
+        public string ListView_Discriminant { get; set; }
         public string ListView_x1 { get; set; }
         public string ListView_x2 { get; set; }
 

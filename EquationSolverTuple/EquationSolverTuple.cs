@@ -3,38 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using DiscriminantEqualZeroLibrary;
-using DiscriminantGreaterThanZeroLibrary;
+using System.Windows.Forms;         //for messagebox
 using DiscriminantLessThanZeroLibrary;
+using DiscriminantGreaterThanZeroLibrary;
+using DiscriminantEqualZeroLibrary;
 using LinearEquationLibrary;
 
-namespace EquationSolver
+namespace EquationSolverTuple
 {
-    public class Solver
+    public class SolverTuple
     {
         public double a, b, c, Discriminant;
+        DiscriminantLessThanZeroTuple DLTZT = new DiscriminantLessThanZeroTuple();
+        DiscriminantGreaterThanZeroTuple DGTZT = new DiscriminantGreaterThanZeroTuple();
+        DiscriminantEqualZeroTuple DEZT = new DiscriminantEqualZeroTuple();
+        LinearEquationTuple LET = new LinearEquationTuple();
 
-        public IDiscriminantEqualZero DEZ { get; set; }
-        public IDiscriminantGreaterThanZero DGTZ { get; set; }
-        public IDiscriminantLessThanZero DLTZ { get; set; }
-        public ILinearEquation LE { get; set; }
-
-        public Solver()
+        public SolverTuple()
         {
-            //DEZ = new DiscriminantEqualZeroLibraryCapitalLetters();
-            //DGTZ = new DiscriminantGreaterThanZeroCapitalLetters();
-            //DLTZ = new DiscriminantLessThanZeroCapitalLetters();
-            //LE = new LinearEquationCapitalLetters();
-
-            DEZ = new DiscriminantEqualZero();
-            DGTZ = new DiscriminantGreaterThanZero();
-            DLTZ = new DiscriminantLessThanZero();
-            LE = new LinearEquation();
+            
         }
 
 
-        public string Results(string InputString)
+        public Tuple<string, string, string>ResultsTuple(string InputString)
         {
             try
             {
@@ -53,31 +44,36 @@ namespace EquationSolver
 
                     if (Discriminant == 0)
                     {
-                        return DEZ.DiscrEqualZero(a, b, Discriminant);
+                        var tupleResults = DEZT.DiscrEqualZeroTuple(a, b, c, Discriminant);
+                        return tupleResults;
                     }
 
                     if (Discriminant > 0)
                     {
-                        return DGTZ.DiscrGreaterThanZero(a, b, Discriminant);
+                        var tupleResults = DGTZT.DiscrGreaterThanZeroTuple(a, b, c, Discriminant);
+                        return tupleResults;
                     }
 
                     if (Discriminant < 0)
                     {
-                        return DLTZ.DiscrLessThanZero(a, b, c, Discriminant);
+                        var tupleResults = DLTZT.DiscrLessThanZeroTuple(a, b, c, Discriminant);
+                        return tupleResults;
                     }
 
-                    return "Quadratic equation return path";
+                    return new Tuple<string, string, string>("Quadratic equation return path", "2", "3");
                 }
                 else
                 {
-                    return LE.LinEquation(b, c);
+                    var tupleResults = LET.LinEquationTuple(b, c);
+                    return tupleResults;
                 }
             }
             catch (Exception ex)
             {
                 
                 MessageBox.Show(ex.ToString());
-                return "Error check the input values and format";
+                var tupleResults = DLTZT.DiscrLessThanZeroTuple(a, b, c, Discriminant);
+                return tupleResults;
             }
         }
     }

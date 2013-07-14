@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="LinearEquation.cs" />
     <Compile Include="LinearEquationCapitalLetters.cs" />
+    <Compile Include="LinearEquationTuple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
