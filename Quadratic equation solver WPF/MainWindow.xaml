@@ -10,17 +10,17 @@
     <Grid>
 
         <StackPanel HorizontalAlignment="Left" Height="253" Margin="10,0,0,0" VerticalAlignment="Top" Width="383" >
-            <Menu Margin="0,10,10,10" Height="23" Grid.ColumnSpan="3">
+            <Menu Margin="0,0,10,10" Height="23">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <DockPanel HorizontalAlignment="Stretch"/>
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
                 <MenuItem Header="Equation">
-                    <MenuItem Header="Solve equation"
-                         	Command="{Binding Path=UpdateLabelButtonClick}"/>
-                    <MenuItem Header="Exit"
-                         	Command="{Binding Path=UpdateLabelButtonClick}"/>
+                    <MenuItem   Header="Solve equation"
+            			        Command="{Binding UpdateLabelButtonClick}"/>
+                    <MenuItem   Header="Exit"
+            			        Command="{Binding ExitApplicationClick}"/>
                 </MenuItem>
                 <MenuItem Header="Help" HorizontalAlignment="Right">
                     <MenuItem Header="About"/>
@@ -30,29 +30,28 @@
             <TextBlock TextWrapping="Wrap" Text="The program solves the quadratic equation of the form ax²+bx+c=0" Height="19" />
             <TextBox 
                 Height="24" 
-                Name="TextBox_input" 
-                Text="{Binding Path=UpdateTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                x:Name="TextBox_input" 
+                Text="{Binding UpdateTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                 Margin="0,0,10,0"  
                 ToolTipService.ShowDuration="10000">
                 <TextBox.ToolTip>
                     <ToolTip 
                         Placement="Bottom"
                         StaysOpen="True" 
-                        Content="Example: To solve the equation of the form 2x²+2x-1=0 &#x0a;enter 2,2,-1 in the text box">
-                    </ToolTip>
+                        Content="Example: To solve the equation of the form 2x²+2x-1=0 &#xA;enter 2,2,-1 in the text box"/>
                 </TextBox.ToolTip>
                 <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding Path=UpdateLabelButtonClick}" Key="Enter" />
+                    <KeyBinding Command="{Binding UpdateLabelButtonClick}" Key="Enter" />
                 </TextBox.InputBindings>
             </TextBox>
-            <Button Command="{Binding UpdateLabelButtonClick}" Content="Calculate" Name="Button_calculate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="373"/>
+            <Button Command="{Binding UpdateLabelButtonClick}" Content="Calculate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="373"/>
             <Label Content="{Binding UpdateLabel}" x:Name="Label_results" Height="144"/>
             <StatusBar/>
         </StackPanel>
         <StatusBarItem Margin="10,288,10,10">
             <TextBlock Text="{Binding TimeCommand}">
-                
-                
+
+
             </TextBlock>
         </StatusBarItem>
     </Grid>
