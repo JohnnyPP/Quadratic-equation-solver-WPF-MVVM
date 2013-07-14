@@ -49,10 +49,7 @@
             <StatusBar/>
         </StackPanel>
         <StatusBarItem Margin="10,288,10,10">
-            <TextBlock Text="{Binding TimeCommand}">
-
-
-            </TextBlock>
+            <TextBlock Text="{Binding TimeCommand}"/>
         </StatusBarItem>
     </Grid>
 </Window>

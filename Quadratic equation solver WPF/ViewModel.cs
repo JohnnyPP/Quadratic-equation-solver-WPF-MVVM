@@ -84,7 +84,15 @@ namespace Quadratic_equation_solver_WPF
 
 		bool CanUpdateLabelExecute()
 		{
-			return true;
+			if (!string.IsNullOrWhiteSpace(UpdateTextBox))  //disables the Calculate button or Solve menu item when UpdateTextBox is empty
+			{
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+			
 		}
 
 		public ICommand UpdateLabelButtonClick
@@ -134,3 +142,4 @@ namespace Quadratic_equation_solver_WPF
 
 	}
 }
+
