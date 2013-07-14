@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;         //for messagebox
+using System.Windows.Forms;                  //for messagebox
 using DiscriminantLessThanZeroLibrary;
 using DiscriminantGreaterThanZeroLibrary;
 using DiscriminantEqualZeroLibrary;
@@ -19,20 +19,12 @@ namespace EquationSolverTuple
         DiscriminantEqualZeroTuple DEZT = new DiscriminantEqualZeroTuple();
         LinearEquationTuple LET = new LinearEquationTuple();
 
-        public SolverTuple()
-        {
-            
-        }
-
-
         public Tuple<string, string, string>ResultsTuple(string InputString)
         {
             try
             {
                 string[] SplitString;
-                //InputLength = TextBox_input.Text;
-                //IndexOfTheFirstComma = TextBox_input.Text.IndexOf(",").ToString();
-                //IndexOfTheSecondComma = TextBox_input.Text.LastIndexOf(",").ToString();
+
                 SplitString = InputString.Split(new Char[] { ',' });
                 a = double.Parse(SplitString[0]);
                 b = double.Parse(SplitString[1]);
@@ -72,8 +64,7 @@ namespace EquationSolverTuple
             {
                 
                 MessageBox.Show(ex.ToString());
-                var tupleResults = DLTZT.DiscrLessThanZeroTuple(a, b, c, Discriminant);
-                return tupleResults;
+                return new Tuple<string, string, string>("Error check the parameters", "", "");
             }
         }
     }

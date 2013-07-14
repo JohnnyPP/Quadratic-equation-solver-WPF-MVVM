@@ -34,21 +34,7 @@
         <StatusBarItem Margin="10,288,10,10">
             <TextBlock Text="{Binding TimeCommand}"/>
         </StatusBarItem>
-
-        <ListView ItemsSource="{Binding ListViewCollection}" Height="256" Margin="398,28,10,0" VerticalAlignment="Top">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="35" Header="No." DisplayMemberBinding="{Binding ListView_No}"/>
-                    <GridViewColumn Width="60" Header="a" DisplayMemberBinding="{Binding ListView_a}" />
-                    <GridViewColumn Width="60" Header="b" DisplayMemberBinding="{Binding ListView_b}" />
-                    <GridViewColumn Width="60" Header="c" DisplayMemberBinding="{Binding ListView_c}" />
-                    <GridViewColumn Width="100" Header="Discriminant" DisplayMemberBinding="{Binding ListView_Discriminant}" />
-                    <GridViewColumn Width="200" Header="Root1" DisplayMemberBinding="{Binding ListView_x1}" />
-                    <GridViewColumn Width="200" Header="Root2" DisplayMemberBinding="{Binding ListView_x2}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Menu Margin="10,0,10,302">
+        <Menu Margin="0,0,0,302">
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel HorizontalAlignment="Stretch"/>
@@ -66,5 +52,27 @@
                 <MenuItem Header="About"/>
             </MenuItem>
         </Menu>
+        <TabControl HorizontalAlignment="Left" Height="297" Margin="398,28,0,0" VerticalAlignment="Top" Width="756">
+            <TabItem Header="Equation history">
+                <Grid>
+                    <ListView ItemsSource="{Binding ListViewCollection}" Height="265" VerticalAlignment="Top">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="35" Header="No." DisplayMemberBinding="{Binding ListView_No}"/>
+                                <GridViewColumn Width="60" Header="a" DisplayMemberBinding="{Binding ListView_a}" />
+                                <GridViewColumn Width="60" Header="b" DisplayMemberBinding="{Binding ListView_b}" />
+                                <GridViewColumn Width="60" Header="c" DisplayMemberBinding="{Binding ListView_c}" />
+                                <GridViewColumn Width="100" Header="Discriminant" DisplayMemberBinding="{Binding ListView_Discriminant}" />
+                                <GridViewColumn Width="200" Header="Root1" DisplayMemberBinding="{Binding ListView_x1}" />
+                                <GridViewColumn Width="200" Header="Root2" DisplayMemberBinding="{Binding ListView_x2}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Plot">
+                <Grid Background="#FFFFFFFF"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
