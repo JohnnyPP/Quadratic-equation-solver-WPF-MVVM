@@ -1,6 +1,7 @@
 ﻿using EquationSolver;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,11 @@ namespace Quadratic_equation_solver_WPF
 		/// The update label
 		/// </summary>
 		private string updateLabel;
+
+        /// <summary>
+        /// The index
+        /// </summary>
+        int index = 1;
 
         #endregion
 
@@ -111,6 +117,16 @@ namespace Quadratic_equation_solver_WPF
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
+
+            //listViewCollection.Add(new ListViewData { ListView_No = "World Of Warcraft", 
+            //    ListView_a = "Blizzarda", 
+            //    ListView_b = "Blizzardb" , 
+            //    ListView_c = "Blizzard2c" , 
+            //    ListView_x1 = "Blizzardx1" , 
+            //    ListView_x2 = "Blizzardx2"});
+          //listViewCollection.Add(new ListViewData { ListView_No = "Halo", ListView_a = "Bungie", ListView_b = "Microsoft" });
+          //listViewCollection.Add(new ListViewData { ListView_No = "Gears Of War", ListView_a = "Epic", ListView_b = "Microsoft" });
+
         }
 
         /// <summary>
@@ -156,6 +172,16 @@ namespace Quadratic_equation_solver_WPF
 		{
 
 			UpdateLabel = solve.Results(UpdateTextBox);
+
+            listViewCollection.Add(new ListViewData { ListView_No = index.ToString(),
+                                                      ListView_a = "a",
+                                                      ListView_b = "b",
+                                                      ListView_c = "c",
+                                                      ListView_x1 = "x1",
+                                                      ListView_x2 = "x2"
+            });
+
+            index++;
 		}
 
         /// <summary>
@@ -221,6 +247,25 @@ namespace Quadratic_equation_solver_WPF
 
 		#endregion
 
-	}
+
+        ObservableCollection<ListViewData> listViewCollection = new ObservableCollection<ListViewData>();
+
+        public ObservableCollection<ListViewData> ListViewCollection
+        { get { return listViewCollection; } }
+
+       
+    }
+
+    public class ListViewData
+    {
+        public string ListView_No { get; set; }
+        public string ListView_a { get; set; }
+        public string ListView_b { get; set; }
+        public string ListView_c { get; set; }
+        public string ListView_x1 { get; set; }
+        public string ListView_x2 { get; set; }
+
+    }
 }
+
 

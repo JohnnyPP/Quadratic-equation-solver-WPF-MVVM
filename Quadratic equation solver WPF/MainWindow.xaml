@@ -2,43 +2,26 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Quadratic_equation_solver_WPF" 
-        Title="Quadratic equation solver" Height="355" Width="403" SizeToContent="WidthAndHeight">
+        Title="Quadratic equation solver" Height="355" Width="795.5" SizeToContent="WidthAndHeight">
     <Window.DataContext>
         <!-- Declaratively create an instance of our ViewModel -->
         <local:ViewModel />
     </Window.DataContext>
     <Grid>
 
-        <StackPanel HorizontalAlignment="Left" Height="253" Margin="10,0,0,0" VerticalAlignment="Top" Width="383" >
-            <Menu Margin="0,0,10,10" Height="23">
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel HorizontalAlignment="Stretch"/>
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
-                <MenuItem Header="Equation">
-                    <MenuItem   Header="Solve equation"
-            			        Command="{Binding UpdateLabelButtonClick}"/>
-                    <MenuItem   Header="Exit"
-            			        Command="{Binding ExitApplicationClick}"/>
-                </MenuItem>
-                <MenuItem Header="Help" HorizontalAlignment="Right">
-                    <MenuItem Header="About"/>
-
-                </MenuItem>
-            </Menu>
+        <StackPanel HorizontalAlignment="Left" Height="222" Margin="10,31,0,0" VerticalAlignment="Top" Width="383" >
             <TextBlock TextWrapping="Wrap" Text="The program solves the quadratic equation of the form ax²+bx+c=0" Height="19" />
             <TextBox 
-                Height="24" 
-                x:Name="TextBox_input" 
-                Text="{Binding UpdateTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
-                Margin="0,0,10,0"  
-                ToolTipService.ShowDuration="10000">
+        		Height="24" 
+        		x:Name="TextBox_input" 
+        		Text="{Binding UpdateTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+        		Margin="0,0,10,0"  
+        		ToolTipService.ShowDuration="10000">
                 <TextBox.ToolTip>
                     <ToolTip 
-                        Placement="Bottom"
-                        StaysOpen="True" 
-                        Content="Example: To solve the equation of the form 2x²+2x-1=0 &#xA;enter 2,2,-1 in the text box"/>
+        				Placement="Bottom"
+        				StaysOpen="True" 
+        				Content="Example: To solve the equation of the form 2x²+2x-1=0 &#xA;enter 2,2,-1 in the text box"/>
                 </TextBox.ToolTip>
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding UpdateLabelButtonClick}" Key="Enter" />
@@ -51,5 +34,34 @@
         <StatusBarItem Margin="10,288,10,10">
             <TextBlock Text="{Binding TimeCommand}"/>
         </StatusBarItem>
+
+        <ListView ItemsSource="{Binding ListViewCollection}" HorizontalAlignment="Left" Height="256" Margin="398,28,10,10" VerticalAlignment="Top" Width="380">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="35" Header="No." DisplayMemberBinding="{Binding ListView_No}"/>
+                    <GridViewColumn Width="60" Header="a" DisplayMemberBinding="{Binding ListView_a}" />
+                    <GridViewColumn Width="60" Header="b" DisplayMemberBinding="{Binding ListView_b}" />
+                    <GridViewColumn Width="60" Header="c" DisplayMemberBinding="{Binding ListView_c}" />
+                    <GridViewColumn Width="60" Header="Root1" DisplayMemberBinding="{Binding ListView_x1}" />
+                    <GridViewColumn Width="60" Header="Root2" DisplayMemberBinding="{Binding ListView_x2}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Menu Margin="10,0,10,302">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Equation">
+                <MenuItem   Header="Solve equation"
+        			Command="{Binding UpdateLabelButtonClick}"/>
+                <MenuItem   Header="Exit"
+        			Command="{Binding ExitApplicationClick}"/>
+            </MenuItem>
+            <MenuItem Header="Help" HorizontalAlignment="Right">
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>
