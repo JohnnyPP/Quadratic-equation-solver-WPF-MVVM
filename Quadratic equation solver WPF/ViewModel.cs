@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -182,6 +183,8 @@ namespace Quadratic_equation_solver_WPF
 
 		}
 
+
+        #region ExitApplicationClick
         /// <summary>
         /// Determines whether this instance [can update label execute].
         /// </summary>
@@ -212,7 +215,7 @@ namespace Quadratic_equation_solver_WPF
 			get { return new RelayCommand(UpdateLabelExecute, CanUpdateLabelExecute); }
 		}
 
-
+        #region ExitApplicationClick
         /// <summary>
         /// Exits the application command.
         /// </summary>
@@ -243,8 +246,41 @@ namespace Quadratic_equation_solver_WPF
 			get { return new RelayCommand(ExitApplicationCommand, CanExitApplicationExecute); }
 		}
 
-		#endregion
+        #endregion
+        #endregion
+       
+        /// <summary>
+        /// ///////////////////////WriteHistoryToFileClick
+        /// </summary>
+        /// 
 
+        void WriteHistoryToFileClickCommand()
+        {
+            using (var writer = new StreamWriter(@"i:\test.txt"))
+            {
+                writer.WriteLine("No. \t a \t b \t c \t Discriminant \t Root1 \t Root2");
+                foreach (ListViewData item in ListViewCollection)
+                {
+                    writer.WriteLine(item.ListView_No + " \t" + item.ListView_a + " \t" + item.ListView_b + " \t" + item.ListView_c
+                                     + " \t" + item.ListView_Discriminant + " \t" + item.ListView_x1 
+                                     + " \t" + item.ListView_x2);
+                }
+            }
+        }
+
+      
+        bool CanWriteHistoryToFileClickExecute()
+        {
+            return true;
+        }
+
+        
+        public ICommand WriteHistoryToFileClick
+        {
+            get { return new RelayCommand(WriteHistoryToFileClickCommand, CanWriteHistoryToFileClickExecute); }
+        }
+
+        #endregion
 
         ObservableCollection<ListViewData> listViewCollection = new ObservableCollection<ListViewData>();
 

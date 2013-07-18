@@ -43,8 +43,8 @@
             <MenuItem Header="Equation">
                 <MenuItem   Header="Solve equation"
         			Command="{Binding UpdateLabelButtonClick}"/>
-                <MenuItem   Header="Save history to file"
-        			Command="{Binding UpdateLabelButtonClick}"/>
+                <MenuItem   Header="Write history to file"
+        			Command="{Binding WriteHistoryToFileClick}"/>
                 <MenuItem   Header="Exit"
         			Command="{Binding ExitApplicationClick}"/>
             </MenuItem>
