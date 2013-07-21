@@ -45,6 +45,8 @@
         			Command="{Binding UpdateLabelButtonClick}"/>
                 <MenuItem   Header="Write history to file"
         			Command="{Binding WriteHistoryToFileClick}"/>
+                <MenuItem   Header="Write history to database with Entity Framework"
+        			Command="{Binding WriteHistoryToDatabaseEntityClick}"/>
                 <MenuItem   Header="Exit"
         			Command="{Binding ExitApplicationClick}"/>
             </MenuItem>
