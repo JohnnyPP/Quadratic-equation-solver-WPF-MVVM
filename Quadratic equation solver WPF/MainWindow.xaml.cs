@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,30 @@ namespace Quadratic_equation_solver_WPF
     {
         public MainWindow()
         {
+            CompositionTarget.Rendering += CompositionTargetRendering;
+            stopwatch.Start();
+
+
+            //DataContext = new MainViewModel();
+            //var Main = new ViewModel.MainViewModel();
+            //this.DataContext = Main;
+
             InitializeComponent();
+
+
+        }
+
+        private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
+        private long lastUpdateMilliSeconds;
+
+        private void CompositionTargetRendering(object sender, EventArgs e)
+        {
+            if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 1000)
+            {
+                //viewModel.UpdateModel();
+                plot1.RefreshPlot(true);
+                lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
+            }
         }
     }
 }

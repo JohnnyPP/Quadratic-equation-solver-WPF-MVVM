@@ -1,5 +1,6 @@
 ﻿using EquationSolver;
 using EquationSolverTuple;
+using OxyPlot;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,41 @@ namespace Quadratic_equation_solver_WPF
 {
 	class ViewModel : INotifyPropertyChanged
 	{
+
+        Random rand = new Random();
+        public Collection<CollectionDataValue> Data { get; set; }
+
+        public class CollectionDataValue
+        {
+            public double xData { get; set; }
+            public double yData { get; set; }
+        }
+
+        private double _randomNumberValue;
+        public double RandomNumberValue
+        {
+            get { return _randomNumberValue; }
+            set
+            {
+                if (_randomNumberValue == value)
+                    return;
+                _randomNumberValue = value;
+                RaisePropertyChanged("RandomNumberValue");
+            }
+        }
+
+        private int _exampleValue;
+        public int ExampleValue
+        {
+            get { return _exampleValue; }
+            set
+            {
+                if (_exampleValue == value)
+                    return;
+                _exampleValue = value;
+                RaisePropertyChanged("ExampleValue");
+            }
+        }
 
 		#region Fields
 		/// <summary>
@@ -121,7 +157,11 @@ namespace Quadratic_equation_solver_WPF
 			dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
 			dispatcherTimer.Start();
-		}
+
+            Data = new Collection<CollectionDataValue>();
+            ExampleValue = 0;
+            
+        }
 
 		/// <summary>
 		/// Handles the Tick event of the dispatcherTimer control.
@@ -132,6 +172,9 @@ namespace Quadratic_equation_solver_WPF
 		{
 
 			TimeCommand = DateTime.Now;
+            RandomNumberValue = 21.5 + rand.NextDouble();
+            Data.Add(new CollectionDataValue { xData = ExampleValue, yData = 21.5 + rand.NextDouble() });
+            ExampleValue++;
 
 		} 
 		#endregion
