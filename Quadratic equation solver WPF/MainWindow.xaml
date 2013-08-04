@@ -73,7 +73,37 @@
                     </ListView>
                 </Grid>
             </TabItem>
-            <TabItem Header="Plot">
+            <TabItem Header="Function plot">
+                <oxy:Plot x:Name="plot2"
+                  Title="{Binding PlotTitle, Mode=OneWay}"
+                  Margin="10">
+                    <oxy:Plot.Axes>
+                        <oxy:LinearAxis Title="x"
+                                Position="Bottom"
+                                MajorGridlineStyle="Solid"
+                                MinorGridlineStyle="Solid"
+                                MinimumPadding="0"
+                                MaximumPadding="0"/>
+                        <oxy:LinearAxis Title="f(x)"
+                                Position="Left"
+                                MajorGridlineStyle="Solid"
+                                MinorGridlineStyle="Solid"
+                                FontSize="12"
+                                TicklineColor="#FF190000"
+                                TickStyle="Outside" />
+                    </oxy:Plot.Axes>
+                    <oxy:Plot.Series>
+                        <oxy:LineSeries
+                    ItemsSource="{Binding DataPlot, Mode=OneWay}"
+                    DataFieldX="xDataPlot"
+                    DataFieldY="yDataPlot"
+                    MarkerSize="3"
+                    MarkerType="Plus"
+                    />
+                    </oxy:Plot.Series>
+                </oxy:Plot>
+            </TabItem>
+            <TabItem Header="Random Plot">
                 <oxy:Plot x:Name="plot1"
                   Title="Texas Instruments TMP102 Temperature Sensor"
                   Margin="10">

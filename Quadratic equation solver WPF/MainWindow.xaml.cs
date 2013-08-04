@@ -21,6 +21,9 @@ namespace Quadratic_equation_solver_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+        
+
         public MainWindow()
         {
             CompositionTarget.Rendering += CompositionTargetRendering;
@@ -32,19 +35,18 @@ namespace Quadratic_equation_solver_WPF
             //this.DataContext = Main;
 
             InitializeComponent();
-
-
+           
         }
 
         private System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
         private long lastUpdateMilliSeconds;
 
-        private void CompositionTargetRendering(object sender, EventArgs e)
+        public void CompositionTargetRendering(object sender, EventArgs e)
         {
             if (stopwatch.ElapsedMilliseconds > lastUpdateMilliSeconds + 1000)
             {
-                //viewModel.UpdateModel();
                 plot1.RefreshPlot(true);
+                plot2.RefreshPlot(true);
                 lastUpdateMilliSeconds = stopwatch.ElapsedMilliseconds;
             }
         }

@@ -16,8 +16,35 @@ using System.Windows.Threading;
 
 namespace Quadratic_equation_solver_WPF
 {
-	class ViewModel : INotifyPropertyChanged
+	public class ViewModel : INotifyPropertyChanged
 	{
+       
+        public Collection<CollectionDataValuePlot> DataPlot { get; set; }
+
+        public class CollectionDataValuePlot
+        {
+            public double xDataPlot { get; set; }
+            public double yDataPlot { get; set; }
+        }
+
+        public string PlotTitle { get; set; }
+
+        bool ClearEnable = false;
+
+        //private string _plotTilte;
+
+        //public string PlotTitle
+        //{
+        //    get { return _plotTilte; }
+        //    set
+        //    {
+        //        if (_plotTilte == value)
+        //            return;
+        //        _plotTilte = value;
+        //        RaisePropertyChanged("RandomNumberValue");
+        //    }
+        //}
+        
 
         Random rand = new Random();
         public Collection<CollectionDataValue> Data { get; set; }
@@ -159,9 +186,12 @@ namespace Quadratic_equation_solver_WPF
 			dispatcherTimer.Start();
 
             Data = new Collection<CollectionDataValue>();
+            DataPlot = new Collection<CollectionDataValuePlot>();
             ExampleValue = 0;
-            
+            PlotTitle = "Quadratic function plot";
         }
+
+
 
 		/// <summary>
 		/// Handles the Tick event of the dispatcherTimer control.
@@ -175,7 +205,7 @@ namespace Quadratic_equation_solver_WPF
             RandomNumberValue = 21.5 + rand.NextDouble();
             Data.Add(new CollectionDataValue { xData = ExampleValue, yData = 21.5 + rand.NextDouble() });
             ExampleValue++;
-
+           
 		} 
 		#endregion
 
@@ -208,15 +238,17 @@ namespace Quadratic_equation_solver_WPF
 		void UpdateLabelExecute()
 		{
 
-			//UpdateLabel = solve.Results(UpdateTextBox);
-
 			var tupleResults = solveTuple.ResultsTuple(UpdateTextBox);
 			UpdateLabel = tupleResults.Item1;
+            double a, b, c;
+            a=solveTuple.a;
+            b=solveTuple.b;
+            c=solveTuple.c;
 			
 			listViewCollection.Add(new ListViewData { ListView_No = indexHistory.ToString(),
-													  ListView_a = solveTuple.a.ToString(),
-													  ListView_b = solveTuple.b.ToString(),
-													  ListView_c = solveTuple.c.ToString(),
+													  ListView_a = a.ToString(),
+													  ListView_b = b.ToString(),
+													  ListView_c = c.ToString(),
 													  ListView_Discriminant = solveTuple.Discriminant.ToString(),
 													  ListView_x1 = tupleResults.Item2,
 													  ListView_x2 = tupleResults.Item3,
@@ -225,9 +257,27 @@ namespace Quadratic_equation_solver_WPF
 
 			indexHistory++;
 
+            
+            if (ClearEnable == true)
+            {
+                DataPlot.Clear();   //clears old collection before drawing new collection
+            }
+            
+            DrawingCollecionLambdaExpressionWithAllCoefficients(a, b, c);
+            ClearEnable = true;
+        }
 
-		}
+        Func<double, double, double, double, double> y = (a, b, c, x) => a * x * x + b * x + c;
 
+        
+
+        void DrawingCollecionLambdaExpressionWithAllCoefficients(double a, double b, double c)
+        {
+            for (double x = -10; x <= 10; x += 0.1)
+            {
+                DataPlot.Add(new CollectionDataValuePlot { xDataPlot = x, yDataPlot = y(a, b, c, x) });
+            }
+        }
 
 		#region ExitApplicationClick
 		/// <summary>
